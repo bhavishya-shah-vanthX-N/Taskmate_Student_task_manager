@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TaskMate is a simple student task management application.">
+    <title>TaskMate | Student Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">T</div>
+            <span>TaskMate</span>
+        </div>
+
+        <p class="menu-heading">MENU</p>
+
+        <nav class="navigation">
+            <button class="nav-link active" data-view="dashboard">
+                <span>⌂</span> Dashboard
+            </button>
+            <button class="nav-link" data-view="tasks">
+                <span>☷</span> My Tasks
+            </button>
+            <button class="nav-link" data-view="upcoming">
+                <span>▦</span> Upcoming
+            </button>
+            <button class="nav-link" data-view="progress">
+                <span>◷</span> Progress
+            </button>
+            <button class="nav-link" data-view="about">
+                <span>ⓘ</span> About
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="footer-icon">✓</div>
+            <p>Stay organized.<br>Achieve more.</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="top-label">STUDENT WORKSPACE</p>
+                <h2 id="page-heading">Dashboard</h2>
+            </div>
+            <div class="top-date" id="current-date"></div>
+        </header>
+
+        <!-- Dashboard -->
+        <section class="page-view active" id="dashboard">
+
+            <div class="welcome-banner">
+                <div>
+                    <p class="welcome-small">YOUR PERSONAL WORKSPACE</p>
+                    <h1>Welcome to TaskMate!</h1>
+                    <p>Organize your tasks, manage your time and stay productive.</p>
+                    <button class="primary-button" id="dashboard-add">
+                        + Add New Task
+                    </button>
+                </div>
+                <div class="welcome-symbol">✓</div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h3>Task Overview</h3>
+                    <p>Here's your current productivity summary.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">☷</div>
+                    <p>Total Tasks</p>
+                    <h2 id="total-count">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">◷</div>
+                    <p>Pending Tasks</p>
+                    <h2 id="pending-count">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p>Completed Tasks</p>
+                    <h2 id="completed-count">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">!</div>
+                    <p>Overdue Tasks</p>
+                    <h2 id="overdue-count">0</h2>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Recent Tasks</h3>
+                            <p>Your latest activities</p>
+                        </div>
+                        <button class="text-button" data-goto="tasks">View All</button>
+                    </div>
+                    <div id="recent-tasks" class="task-list"></div>
+                </div>
+
+                <div class="panel progress-panel">
+                    <h3>Overall Progress</h3>
+                    <p>Your task completion status</p>
+                    <div class="progress-circle" id="dashboard-circle">
+                        <div>
+                            <strong id="dashboard-percentage">0%</strong>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                    <div class="progress-description">
+                        <span>Completed tasks</span>
+                        <strong id="dashboard-progress-text">0 / 0</strong>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- My Tasks -->
+        <section class="page-view" id="tasks">
+
+            <div class="section-heading">
+                <div>
+                    <h3>My Tasks</h3>
+                    <p>Manage all your academic and personal activities.</p>
+                </div>
+                <button class="primary-button" id="add-task-button">
+                    + Add Task
+                </button>
+            </div>
+
+            <div class="panel">
+
+                <div class="task-controls">
+                    <input type="search" id="search-input"
+                        placeholder="Search tasks...">
+
+                    <select id="filter-status">
+                        <option value="all">All Tasks</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+
+                    <select id="filter-category">
+                        <option value="all">All Categories</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div id="all-tasks" class="task-list"></div>
+
+            </div>
+        </section>
+
+        <!-- Upcoming Tasks -->
+        <section class="page-view" id="upcoming">
+
+            <div class="section-heading">
+                <div>
+                    <h3>Upcoming Tasks</h3>
+                    <p>Keep an eye on your upcoming deadlines.</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div id="upcoming-tasks" class="task-list"></div>
+            </div>
+
+        </section>
+
+        <!-- Progress -->
+        <section class="page-view" id="progress">
+
+            <div class="section-heading">
+                <div>
+                    <h3>Your Progress</h3>
+                    <p>Monitor your productivity and task completion.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p>Total Tasks</p>
+                    <h2 id="progress-total">0</h2>
+                </div>
+                <div class="stat-card">
+                    <p>Completed</p>
+                    <h2 id="progress-completed">0</h2>
+                </div>
+                <div class="stat-card">
+                    <p>Remaining</p>
+                    <h2 id="progress-pending">0</h2>
+                </div>
+            </div>
+
+            <div class="panel progress-detail">
+                <h3>Completion Summary</h3>
+                <div class="large-progress">
+                    <div id="large-progress-fill"></div>
+                </div>
+                <h2 id="progress-percentage">0% Completed</h2>
+                <p id="progress-message">Start adding tasks to track your progress.</p>
+            </div>
+
+        </section>
+
+        <!-- About -->
+        <section class="page-view" id="about">
+
+            <div class="section-heading">
+                <div>
+                    <h3>About TaskMate</h3>
+                    <p>A simple solution to everyday student productivity.</p>
+                </div>
+            </div>
+
+            <div class="panel about-panel">
+                <div class="brand-icon large-brand">T</div>
+                <h2>TaskMate</h2>
+                <p>
+                    TaskMate is a student task management website designed
+                    to help students organize their academic and personal
+                    responsibilities in one place.
+                </p>
+
+                <h3>Our Features</h3>
+                <ul>
+                    <li>Create, edit and delete tasks.</li>
+                    <li>Organize tasks using categories.</li>
+                    <li>Set priorities and deadlines.</li>
+                    <li>Track completed and pending activities.</li>
+                    <li>Save tasks using browser LocalStorage.</li>
+                    <li>Access the website on different screen sizes.</li>
+                </ul>
+
+                <h3>Technology Used</h3>
+                <p>HTML5, CSS3 and JavaScript.</p>
+
+                <p class="about-note">
+                    Developed as a Web Development course mini-project.
+                </p>
+            </div>
+
+        </section>
+
+        <footer class="main-footer">
+            TaskMate © 2026 | Student Task Manager
+        </footer>
+
+    </main>
+</div>
+
+<!-- Add/Edit Task Dialog -->
+<dialog id="task-dialog">
+
+    <form id="task-form">
+
+        <div class="dialog-heading">
+            <div>
+                <h2 id="dialog-title">Add New Task</h2>
+                <p>Enter your task details below.</p>
+            </div>
+            <button type="button" class="close-button"
+                id="close-dialog">×</button>
+        </div>
+
+        <label for="task-title">Task Title *</label>
+        <input type="text" id="task-title"
+            placeholder="Enter task title" maxlength="80" required>
+
+        <label for="task-description">Description</label>
+        <textarea id="task-description"
+            placeholder="Enter task description" maxlength="300"></textarea>
+
+        <div class="form-row">
+            <div>
+                <label for="task-category">Category</label>
+                <select id="task-category">
+                    <option value="Academic">Academic</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="task-priority">Priority</label>
+                <select id="task-priority">
+                    <option value="High">High</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="task-date">Due Date *</label>
+        <input type="date" id="task-date" required>
+
+        <div class="dialog-actions">
+            <button type="button" class="secondary-button"
+                id="cancel-task">Cancel</button>
+            <button type="submit" class="primary-button"
+                id="save-task-button">Save Task</button>
+        </div>
+
+    </form>
+</dialog>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
